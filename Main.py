@@ -5,7 +5,7 @@ from Player import Player
 
 class Game:
     def __init__(self):
-        player_sprite = Player((SCREEN_WIDTH / 2, SCREEN_HEIGHT))
+        player_sprite = Player((SCREEN_WIDTH / 2, SCREEN_HEIGHT), SCREEN_WIDTH, 5)
         self.player = pygame.sprite.GroupSingle(player_sprite)
         
 
@@ -13,7 +13,7 @@ class Game:
     # draw all sprite groups
     def run(self):
         self.player.draw(screen)
-
+        self.player.update()
         
         
 if __name__ == '__main__':
