@@ -1,18 +1,18 @@
-# Main file to run the game
-
-#IMPORTS
 import pygame
 import os
 import sys
+from Player import Player
 
 class Game:
     def __init__(self):
-        pass
+        player_sprite = Player((SCREEN_WIDTH / 2, SCREEN_HEIGHT))
+        self.player = pygame.sprite.GroupSingle(player_sprite)
+        
 
     # update all sprite groups
     # draw all sprite groups
     def run(self):
-        pass
+        self.player.draw(screen)
 
         
         
@@ -20,13 +20,13 @@ if __name__ == '__main__':
     #Initial Setup
     pygame.init()
 
-    screen_width = 600
-    screen_height = 600
-    fps = 60
+    SCREEN_WIDTH = 600
+    SCREEN_HEIGHT = 600
+    FPS = 60
 
-    screen = pygame.display.set_mode((screen_width, screen_height))
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Space Invaders")
-    clock = pygame.time.Clock()
+    CLOCK = pygame.time.Clock()
     game = Game()
 
 
@@ -41,4 +41,4 @@ if __name__ == '__main__':
 
 
         pygame.display.flip()
-        clock.tick(60)
+        CLOCK.tick(FPS)
