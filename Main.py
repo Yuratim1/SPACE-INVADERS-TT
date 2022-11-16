@@ -3,6 +3,7 @@ import os
 import sys
 from Player import Player
 
+
 class Game:
     def __init__(self):
         player_sprite = Player((SCREEN_WIDTH / 2, SCREEN_HEIGHT), SCREEN_WIDTH, 5)
@@ -12,8 +13,11 @@ class Game:
     # update all sprite groups
     # draw all sprite groups
     def run(self):
-        self.player.draw(screen)
         self.player.update()
+
+        self.player.sprite.bullet.draw(screen)
+        self.player.draw(screen)
+        
         
         
 if __name__ == '__main__':

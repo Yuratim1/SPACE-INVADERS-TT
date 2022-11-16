@@ -1,5 +1,6 @@
 import pygame
 import os
+from laser import Laser
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, constraint, speed):
@@ -12,6 +13,9 @@ class Player(pygame.sprite.Sprite):
         self.ready_laser = True
         self.laser_timer = 0
         self.laser_cooldown = 600
+        self.bullet = pygame.sprite.Group()
+
+
         
     def player_movement(self):
         keys = pygame.key.get_pressed()
@@ -33,8 +37,9 @@ class Player(pygame.sprite.Sprite):
     
     #need new class for laser
     def shoot_laser(self):
-        print('SHOOTING')
+        self.bullet.add(Laser(self.rect.midtop))
+        print("SHOOT")
         
     def update(self):
         self.player_movement()
-        self.recharge
+        self.recharge()
