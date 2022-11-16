@@ -22,8 +22,7 @@ class Player(pygame.sprite.Sprite):
         
     
     def shoot_laser(self):
-        pass    
+        print('SHOOTING')
         
     def update(self):
         self.player_movement()
-        self.shoot_laser()
