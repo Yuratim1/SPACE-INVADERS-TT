@@ -2,6 +2,7 @@ import pygame
 import os
 import sys
 from Player import Player
+import obstaclesb
 
 
 class Game:
