@@ -31,6 +31,7 @@ class Player(pygame.sprite.Sprite):
             if current_time - self.laser_timer >= self.laser_cooldown:
                 self.ready_laser = True
     
+    #need new class for laser
     def shoot_laser(self):
         print('SHOOTING')
         
