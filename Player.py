@@ -36,7 +36,7 @@ class Player(pygame.sprite.Sprite):
     
     #need new class for laser
     def shoot_laser(self):
-        self.bullet.add(Laser(self.rect.midtop))
+        self.bullet.add(Laser(self.rect.midtop, 8, self.rect.bottom))
         
         
     def update(self):
