@@ -2,6 +2,7 @@ import pygame
 import sys
 from Player import Player
 import obstacles
+import aliens
 
 
 class Game:
