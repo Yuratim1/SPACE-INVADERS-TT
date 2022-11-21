@@ -85,7 +85,7 @@ class Game:
             self.alien_lasers.add(laser_sprite)
             
     def collison_checks(self):
-        
+        pass
     
     
     # update all sprite groups
