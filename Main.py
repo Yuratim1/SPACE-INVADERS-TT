@@ -1,5 +1,6 @@
 import pygame
 import sys
+import os
 from Player import Player
 import obstacles
 from aliens import Aliens, Bonusalien
@@ -11,6 +12,13 @@ class Game:
     def __init__(self):
         player_sprite = Player((SCREEN_WIDTH / 2, SCREEN_HEIGHT), SCREEN_WIDTH, 5)
         self.player = pygame.sprite.GroupSingle(player_sprite)
+
+        #Health and Score
+        self.lives = 3
+        self.lives_surf = pygame.image.load(os.path.join('graphics', 'player.png')).convert_alpha()
+        self.lives_x_start_pos = SCREEN_WIDTH - (self.lives_surf.get_size()[0] * 2 + 20)
+        self.score = 0
+        self.font = pygame.font.Font('graphics/Pixeltype.ttf', 35)
 
         #block setup
         self.shape = obstacles.shape
@@ -100,7 +108,11 @@ class Game:
             for i in self.alien_lasers:
                 if pygame.sprite.spritecollide(i, self.player, False):           
                     i.kill()
-                    print("Dead")
+                    self.lives -= 1
+                    if self.lives <= 0:
+                        pygame.quit()
+                        sys.exit()
+
                 elif pygame.sprite.spritecollide(i, self.blocks, True):
                     i.kill()
                 
@@ -111,6 +123,16 @@ class Game:
                 if pygame.sprite.spritecollide(i, self.player, True):
                     pygame.quit()
                     sys.exit()
+
+    def display_lives(self):
+        for lives in range(self.lives - 1):
+            x = self.lives_x_start_pos + (lives * (self.lives_surf.get_size()[0] + 10))
+            screen.blit(self.lives_surf, (x, 8))
+   
+    def display_score(self):
+        score_surf = self.font.render(f' Score: {self.score}', 1, 'white')
+        score_rect = score_surf.get_rect(topleft = (10, 10))
+        screen.blit(score_surf, score_rect)
 
     # update all sprite groups
     # draw all sprite groups
@@ -123,6 +145,8 @@ class Game:
         self.bonus_alien_time()
         self.bonus_alien.update()
         self.collison_checks()
+        self.display_lives()
+        self.display_score()
 
         self.player.sprite.bullet.draw(screen)
         self.player.draw(screen)
