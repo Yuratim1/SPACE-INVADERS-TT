@@ -86,8 +86,32 @@ class Game:
             
     def collison_checks(self):
         
-    
-    
+        #Player laser
+        if self.player.sprite.bullet:
+            for i in self.player.sprite.bullet:
+                if pygame.sprite.spritecollide(i, self.blocks, True):
+                    i.kill()
+                elif pygame.sprite.spritecollide(i, self.aliens, True):
+                    i.kill()
+                elif pygame.sprite.spritecollide(i, self.bonus_alien, True):
+                    i.kill()
+        #Alien Laser
+        if self.alien_lasers:
+            for i in self.alien_lasers:
+                if pygame.sprite.spritecollide(i, self.player, False):           
+                    i.kill()
+                    print("Dead")
+                elif pygame.sprite.spritecollide(i, self.blocks, True):
+                    i.kill()
+                
+        if self.aliens:
+            for i in self.aliens:
+                pygame.sprite.spritecollide(i, self.blocks, True)
+
+                if pygame.sprite.spritecollide(i, self.player, True):
+                    pygame.quit()
+                    sys.exit()
+
     # update all sprite groups
     # draw all sprite groups
     def run(self):
@@ -98,6 +122,7 @@ class Game:
         self.alien_lasers.update()
         self.bonus_alien_time()
         self.bonus_alien.update()
+        self.collison_checks()
 
         self.player.sprite.bullet.draw(screen)
         self.player.draw(screen)
