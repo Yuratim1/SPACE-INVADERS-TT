@@ -99,10 +99,16 @@ class Game:
             for i in self.player.sprite.bullet:
                 if pygame.sprite.spritecollide(i, self.blocks, True):
                     i.kill()
-                elif pygame.sprite.spritecollide(i, self.aliens, True):
+                
+                alien_hit = pygame.sprite.spritecollide(i, self.aliens, True)
+                if alien_hit:
+                    for alien in alien_hit:
+                        self.score += alien.value
                     i.kill()
-                elif pygame.sprite.spritecollide(i, self.bonus_alien, True):
+
+                if pygame.sprite.spritecollide(i, self.bonus_alien, True):
                     i.kill()
+                    self.score += 500
         #Alien Laser
         if self.alien_lasers:
             for i in self.alien_lasers:
