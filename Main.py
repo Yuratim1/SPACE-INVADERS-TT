@@ -40,7 +40,6 @@ class Game:
         self.bonus_alien_spawn_time = randint(400, 800)
         
 
-
     def create_obstacles(self, x_start, y_start, offset_x):
         for row_index, row in enumerate(self.shape):
             for col_index, col in enumerate(row):
